@@ -3,14 +3,21 @@
 <br>
 
 <div>
-  <form>
-    <Label>Enter you index</Label>
-    <input/>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <label for="index">Enter your index:</label>
+    <input [value]="data.state.index" type="text" id="index" name="index" formControlName="index" required>
 
-    <button></button>
+    <button type="submit">Submit</button>
   </form>
 
-  <h3>Indexes i have seen</h3>
-  
+
+  <h3>Indexes I have seen:</h3>
+  <ul id="seenIndexes">
+    <!-- List items will be dynamically added here -->
+  </ul>
+
   <h3>Calculated Values:</h3>
+  <ul id="calculatedValues">
+    <!-- List items will be dynamically added here -->
+  </ul>
 </div>

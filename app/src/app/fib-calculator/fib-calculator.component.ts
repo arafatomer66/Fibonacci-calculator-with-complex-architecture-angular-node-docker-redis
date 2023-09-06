@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-fib-calculator',
@@ -8,8 +10,13 @@ import { DataService } from '../services/data.service';
 })
 export class FibCalculatorComponent {
   public entries:any = [];
+  myForm: FormGroup;
 
-  constructor(public data: DataService) {}
+  constructor(public data: DataService, private fb: FormBuilder, private http: HttpClient) {
+    this.myForm = this.fb.group({
+      index: ['', Validators.required]
+    });
+  }
 
   getSeenIndexes() {
     return this.data.state.seenIndexes.map(({ number }) => {
@@ -24,5 +31,13 @@ export class FibCalculatorComponent {
         key : this.data.state.values[key]
       });
     }
+  }
+
+  async onSubmit() {
+    this.http.post('api/values',{
+      index: this.myForm.value.index
+    });
+
+    this.myForm.reset();
   }
 }
