@@ -9,8 +9,8 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   state = {
-    seenIndexes: [] as any,
-    values: {},
+    seenIndexes: [] as any[],
+    values: {} as any,
     index: ""
   }
 
@@ -29,7 +29,7 @@ export class DataService {
   async fetchIndexes() {
     const seenIndexes = await this.http.get('/api/values/all');
     seenIndexes.subscribe((values) => {
-      this.state.seenIndexes = values;
+      this.state.seenIndexes.push(values);
   });
   }
 }
