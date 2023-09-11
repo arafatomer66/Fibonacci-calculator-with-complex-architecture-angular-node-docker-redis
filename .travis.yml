@@ -2,8 +2,8 @@ sudo: required
 services:
   - docker
 
-before_install: 
-  - docker build -t 1528280/angular-test -f ./app/Dockerfile.dev ./app
+# before_install: 
+#   - docker build -t 1528280/angular-test -f ./app/Dockerfile.dev ./app
   
 
 script:
